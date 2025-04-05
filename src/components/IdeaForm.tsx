@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -26,7 +25,7 @@ import {
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Slider } from "@/components/ui/slider";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { CoinIcon, AlertCircle, BrainCircuit } from "lucide-react";
+import { CoinsIcon, AlertCircle, BrainCircuit } from "lucide-react";
 
 const formSchema = z.object({
   title: z.string().min(10, {
@@ -260,7 +259,7 @@ const IdeaForm = () => {
                       <FormLabel>Price (SByte)</FormLabel>
                       <FormControl>
                         <div className="flex items-center space-x-2">
-                          <CoinIcon className="h-4 w-4 text-amber-500" />
+                          <CoinsIcon className="h-4 w-4 text-amber-500" />
                           <Input 
                             type="number" 
                             onChange={e => field.onChange(parseFloat(e.target.value))}

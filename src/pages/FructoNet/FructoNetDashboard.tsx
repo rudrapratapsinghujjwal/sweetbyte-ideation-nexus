@@ -3,6 +3,7 @@ import { CalendarDays, DollarSign, LightbulbIcon, TrendingUp } from "lucide-reac
 import { Button } from "@/components/ui/button";
 import Header from "@/components/Header";
 import MetricsCard from "@/components/MetricsCard";
+import IdeaCard from "@/components/IdeaCard";
 import { mockIdeas, mockInvestor } from "@/data/mockData";
 import MeetingCard from "@/components/MeetingCard";
 import { useNavigate } from "react-router-dom";
