@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { toast } from "@/components/ui/use-toast";
 import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router-dom";
 import {
   Form,
   FormControl,
@@ -26,6 +27,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Slider } from "@/components/ui/slider";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { CoinsIcon, AlertCircle, BrainCircuit } from "lucide-react";
+import { mockIdeas } from "@/data/mockData";
 
 const formSchema = z.object({
   title: z.string().min(10, {
@@ -69,6 +71,7 @@ const CATEGORIES = [
 ];
 
 const IdeaForm = () => {
+  const navigate = useNavigate();
   const [aiAnalyzing, setAiAnalyzing] = useState(false);
   const [ratings, setRatings] = useState({
     originality: 0,
@@ -91,10 +94,36 @@ const IdeaForm = () => {
   function onSubmit(values: z.infer<typeof formSchema>) {
     // In a real app, you would submit to your backend
     console.log(values);
+    
+    // Simulate adding a new idea to both portals
+    const newIdea = {
+      id: mockIdeas.length + 1,
+      title: values.title,
+      shortDescription: values.shortDescription,
+      fullDescription: values.fullDescription,
+      createdAt: new Date().toISOString(),
+      price: values.price,
+      creator: "Current User",
+      ratings: ratings.originality > 0 ? ratings : {
+        originality: Math.floor(Math.random() * 31) + 65,
+        marketFit: Math.floor(Math.random() * 31) + 65,
+        profitability: Math.floor(Math.random() * 31) + 65,
+        technicalFeasibility: Math.floor(Math.random() * 31) + 65
+      },
+      status: "Open",
+      category: values.category
+    };
+    
+    // In a real app, this would update the database
+    // For demo purposes, we're just showing a message
+    mockIdeas.unshift(newIdea);
+    
     toast({
       title: "Idea Submitted Successfully!",
       description: "Your idea has been added to the marketplace.",
     });
+    
+    // Reset form and ratings
     form.reset();
     setRatings({
       originality: 0,
@@ -102,6 +131,11 @@ const IdeaForm = () => {
       profitability: 0,
       technicalFeasibility: 0
     });
+    
+    // Navigate to the ideas list to see the new idea
+    setTimeout(() => {
+      navigate("/glucohub/ideas");
+    }, 1500);
   }
 
   // This would normally call an API endpoint with actual AI analysis

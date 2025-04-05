@@ -100,7 +100,7 @@ const IdeaDetailsPage = () => {
                   <CardTitle>Full Description</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="whitespace-pre-line">{idea.longDescription || "No detailed description provided."}</p>
+                  <p className="whitespace-pre-line">{idea.fullDescription || "No detailed description provided."}</p>
                 </CardContent>
               </Card>
             </div>
