@@ -41,9 +41,9 @@ const IdeaForm = () => {
     // In a real app, you would submit to your backend
     console.log(values);
     
-    // Simulate adding a new idea to both portals
+    // Create a new idea with complete information
     const newIdea = {
-      id: mockIdeas.length + 1,
+      id: mockIdeas.length > 0 ? Math.max(...mockIdeas.map(idea => idea.id)) + 1 : 1,
       title: values.title,
       shortDescription: values.shortDescription,
       fullDescription: values.fullDescription,
@@ -61,7 +61,8 @@ const IdeaForm = () => {
     };
     
     // In a real app, this would update the database
-    // For demo purposes, we're just showing a message
+    // For demo purposes, we're updating the mockIdeas array directly
+    // Using unshift to add to the beginning of the array so it appears first in the list
     mockIdeas.unshift(newIdea);
     
     toast({

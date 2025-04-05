@@ -3,10 +3,23 @@ import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
 import { BrainCircuit } from "lucide-react";
 
-const AiAnalysisSection = ({ aiAnalyzing, ratings, onAnalyze }) => {
+interface Rating {
+  originality: number;
+  marketFit: number;
+  profitability: number;
+  technicalFeasibility: number;
+}
+
+interface AiAnalysisSectionProps {
+  aiAnalyzing: boolean;
+  ratings: Rating;
+  onAnalyze: () => void;
+}
+
+const AiAnalysisSection = ({ aiAnalyzing, ratings, onAnalyze }: AiAnalysisSectionProps) => {
   const hasRatings = Object.values(ratings).some(value => value > 0);
   
-  const getRatingColor = (score) => {
+  const getRatingColor = (score: number) => {
     if (score >= 90) return "text-green-500";
     if (score >= 80) return "text-blue-500";
     if (score >= 70) return "text-amber-500";
